@@ -8,12 +8,13 @@ class Grupo:
 
     grado = None
 
-    def __init__(self, grupo="grupo ordinado", asignaturas=None, estudiantes=None):
+    def __init__(self, grupo="grupo predeterminado", asignaturas=[] grado=None, estudiantes=None):
         self._grupo = grupo
         self._asignaturas = asignaturas
         self.listadoAlumnos = estudiantes
+        self.grado = "Grado "+str(grado)
 
-    def listadoAsignaturas(self, kwargs):
+    def listadoAsignaturas(self, **kwargs):
         for x in kwargs.values():
             self._asignaturas.append(Asignatura(x))
 
@@ -22,7 +23,10 @@ class Grupo:
             lista.append(alumno)
             self.listadoAlumnos = self.listadoAlumnos + lista
         else:
-            self.listadoAlumnos = [alumno]
+            self.listadoAlumnos = lista + [alumno]
+
+    def __str__(self):
+        return "Grupo de estudiantes: "+ self._grupo
 
     @ classmethod
     def asignarNombre(cls, nombre="Grado 10"):
